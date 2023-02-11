@@ -53,29 +53,29 @@ describe('ButtonsComponent', () => {
     expect(component.icon).toEqual(Icon.trash);
   })
 
-  it('should correct position content', () => {
+  it('should button has gap', () => {
     // С неуказанными входными параметрами класс не будет добавлен
-    expect(component.isSpaceBetween).toBeFalsy();
+    expect(component.isGap).toBeFalsy();
 
     // Если указана только иконка без текста, то класс не будет добавлен
     component.icon = Icon.edit;
     fixture.detectChanges();
 
-    expect(component.isSpaceBetween).toBeFalsy();
+    expect(component.isGap).toBeFalsy();
 
     // Если указан только текст, то класс не будет добавлен
     component.icon = Icon.none;
     component.name = 'Test';
     fixture.detectChanges();
 
-    expect(component.isSpaceBetween).toBeFalsy();
+    expect(component.isGap).toBeFalsy();
 
     // Если указан и текст, и иконка, то класс будет добавлен
     component.icon = Icon.edit;
     component.name = 'Test 2';
     fixture.detectChanges();
 
-    expect(component.isSpaceBetween).toBeTruthy();
+    expect(component.isGap).toBeTruthy();
   })
 
   it('should correct background set', () => {

@@ -15,7 +15,7 @@ export class ButtonsComponent {
   @Input() name: string = '';
   @Input() isBackground: boolean = false;
 
-  @HostBinding('class.g-flex-j-b') get isSpaceBetween() {
+  @HostBinding('class.g-flex-with-gap') get isGap() {
     return this.icon !== Icon.none && !!this.name.length;
   };
   @HostBinding('class.buttons-background') get isButtonBackground() {
