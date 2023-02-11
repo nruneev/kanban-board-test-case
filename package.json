@@ -1,6 +1,7 @@
 {
   "name": "kanban-board-test-case",
-  "version": "0.0.0",
+  "description": "Тестовое задание для компании СТРОЙСОФТ, ГК",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
