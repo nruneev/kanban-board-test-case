@@ -1,6 +1,6 @@
-import {Task} from "./task";
+import {StatusTask} from "../enum/status-task";
 
 export interface Column {
   title: string,
-  tasks: Task[]
+  value: StatusTask,
 }

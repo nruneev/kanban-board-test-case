@@ -8,6 +8,10 @@ import { EffectsModule } from '@ngrx/effects';
 import {taskReducer} from "./store/reducers/task.reducer";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {AppRoutingModule} from "./app-routing.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from "@angular/material/card";
+import {ColumnModule} from "./core/components/column/column.module";
+import {ButtonsModule} from "./shared/components/buttons/buttons.module";
 
 
 const dbConfig: DBConfig  = {
@@ -36,7 +40,11 @@ const dbConfig: DBConfig  = {
     NgxIndexedDBModule.forRoot(dbConfig),
     StoreModule.forRoot(taskReducer),
     StoreDevtoolsModule.instrument(),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    BrowserAnimationsModule,
+    MatCardModule,
+    ColumnModule,
+    ButtonsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

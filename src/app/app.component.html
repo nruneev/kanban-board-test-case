@@ -1,0 +1,8 @@
+<mat-card>
+  <mat-card-header>
+   <app-buttons name="Создать" [isBackground]="true" [icon]="icons.plus"></app-buttons>
+  </mat-card-header>
+   <mat-card-content>
+     <app-column *ngFor="let column of columns" [column]="column"></app-column>
+   </mat-card-content>
+</mat-card>
