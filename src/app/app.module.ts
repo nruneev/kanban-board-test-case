@@ -1,10 +1,30 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {DBConfig, NgxIndexedDBModule} from "ngx-indexed-db";
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {ButtonsModule} from "./shared/components/buttons/buttons.module";
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import {taskReducer} from "./store/reducers/task.reducer";
+import {StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {AppRoutingModule} from "./app-routing.module";
 
+
+const dbConfig: DBConfig  = {
+  name: 'KanbanBoardTestCase',
+  version: 1,
+  objectStoresMeta: [{
+    store: 'task',
+    storeConfig: { keyPath: 'id', autoIncrement: true },
+    storeSchema: [
+      { name: 'title', keypath: 'title', options: { unique: false } },
+      { name: 'description', keypath: 'description', options: { unique: false } },
+      { name: 'time', keypath: 'time', options: { unique: false } },
+      { name: 'status', keypath: 'status', options: { unique: false } },
+      { name: 'dataUpdate', keypath: 'dataUpdate', options: { unique: false } },
+    ]
+  }]
+};
 
 @NgModule({
   declarations: [
@@ -13,7 +33,10 @@ import {ButtonsModule} from "./shared/components/buttons/buttons.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ButtonsModule
+    NgxIndexedDBModule.forRoot(dbConfig),
+    StoreModule.forRoot(taskReducer),
+    StoreDevtoolsModule.instrument(),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]
