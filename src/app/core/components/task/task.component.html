@@ -1,8 +1,8 @@
 <mat-card>
   <mat-card-header [class]="'header-' + task.status" [class.g-flex-s-e]="task.status !== 'new'">
-    <app-buttons *ngIf="task.status === 'new'" [icon]="icons.trash"></app-buttons>
-    <app-buttons *ngIf="task.status === 'new' || task.status === 'process'" [icon]="icons.edit"></app-buttons>
-    <app-buttons *ngIf="task.status === 'done'" [icon]="icons.view"></app-buttons>
+    <app-buttons *ngIf="task.status === 'new'" [icon]="icons.trash" (click)="removeTask()"></app-buttons>
+    <app-buttons *ngIf="task.status === 'new' || task.status === 'process'" [icon]="icons.edit" (click)="openEdit()"></app-buttons>
+    <app-buttons *ngIf="task.status === 'done'" [icon]="icons.view" (click)="viewTask()"></app-buttons>
   </mat-card-header>
   <mat-card-content>
     <p>{{task.title}}</p>
@@ -13,18 +13,18 @@
       <p>Время:</p>
       {{task.time}} с
     </div>
-    <app-time-bar *ngIf="task.status === 'process' && !(isTimeLose | async)"
+    <app-time-bar *ngIf="task.status === 'process' && !task.isTimeLose"
                   [time]="task.time"
                   [dateUpdate]="task.dataUpdate"
                   (timeLose)="changeTimeLose($event)"
     ></app-time-bar>
-    <div *ngIf="task.status === 'process' && isTimeLose | async">
+    <div *ngIf="task.status === 'process' && task.isTimeLose">
       <p>Просрочена</p>
     </div>
-    <div *ngIf="task.status === 'done' && isTimeLose | async">
+    <div *ngIf="task.status === 'done' && task.isTimeLose">
       <p>Просрочена</p>
     </div>
-    <div *ngIf="task.status === 'done' && !(isTimeLose | async)">
+    <div *ngIf="task.status === 'done' && !task.isTimeLose">
       <p>Успех</p>
     </div>
   </mat-card-footer>
