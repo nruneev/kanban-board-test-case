@@ -18,6 +18,9 @@ export class ButtonsComponent {
   @HostBinding('class.g-flex-with-gap') get isGap() {
     return this.icon !== Icon.none && !!this.name.length;
   };
+  @HostBinding('class.button-small-padding') get isSmallPAdding() {
+    return (this.icon !== Icon.none && !this.name.length) || (this.icon === Icon.none && !!this.name.length);
+  };
   @HostBinding('class.buttons-background') get isButtonBackground() {
     return this.isBackground;
   };

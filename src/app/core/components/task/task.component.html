@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-header [class]="'header-' + task.status" [class.g-flex-s-e]="task.status !== 'new'">
+    <app-buttons *ngIf="task.status === 'new'" [icon]="icons.trash"></app-buttons>
+    <app-buttons *ngIf="task.status === 'new' || task.status === 'process'" [icon]="icons.edit"></app-buttons>
+    <app-buttons *ngIf="task.status === 'done'" [icon]="icons.view"></app-buttons>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{task.title}}</p>
+    <span>{{task.description}}</span>
+  </mat-card-content>
+  <mat-card-footer>
+    <div *ngIf="task.status === 'new'">
+      <p>Время:</p>
+      {{task.time}} с
+    </div>
+    <app-time-bar *ngIf="task.status === 'process' && !(isTimeLose | async)"
+                  [time]="task.time"
+                  [dateUpdate]="task.dataUpdate"
+                  (timeLose)="changeTimeLose($event)"
+    ></app-time-bar>
+    <div *ngIf="task.status === 'process' && isTimeLose | async">
+      <p>Просрочена</p>
+    </div>
+    <div *ngIf="task.status === 'done' && isTimeLose | async">
+      <p>Просрочена</p>
+    </div>
+    <div *ngIf="task.status === 'done' && !(isTimeLose | async)">
+      <p>Успех</p>
+    </div>
+  </mat-card-footer>
+</mat-card>
