@@ -19,7 +19,7 @@ export class ButtonsComponent {
     return this.icon !== Icon.none && !!this.name.length;
   };
   @HostBinding('class.button-small-padding') get isSmallPAdding() {
-    return (this.icon !== Icon.none && !this.name.length) || (this.icon === Icon.none && !!this.name.length);
+    return (this.icon !== Icon.none && !this.name.length) || (this.icon === Icon.none && !!this.name.length && !this.isBackground);
   };
   @HostBinding('class.buttons-background') get isButtonBackground() {
     return this.isBackground;

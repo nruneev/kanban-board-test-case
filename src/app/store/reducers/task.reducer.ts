@@ -1,43 +1,38 @@
 import {initialState, TaskState} from "../state/task.state";
-import {ETaskAction, TaskActions} from "../actions/task.action";
+import {ActionReducerMap, createReducer, on} from "@ngrx/store";
 
-export const taskReducer = (state = initialState, action: TaskActions): TaskState => {
-  switch (action.type) {
-    case ETaskAction.GetTasks: {
-      return {
-        ...state,
-        tasks: action.payload
-      };
-    }
-    case ETaskAction.AddTask: {
-      const tasks = [...state.tasks, action.payload]
+import {AddTask, GetTasks, SelectTask, UpdateTask} from "../actions/task.action";
 
-      return {
-        ...state,
-        tasks
-      };
-    }
-    case ETaskAction.UpdateTask: {
-      const tasks = state.tasks.map(task => {
-        if (task.id === action.payload.id) {
-          return action.payload
-        }
-        return task;
-      });
+export const taskReducer = createReducer(
+  initialState,
+  on(GetTasks, (state, {tasks}) => ({
+    ...state,
+    tasks
+  })),
+  on(AddTask, (state, {task}) => ({
+      ...state,
+      tasks: [...state.tasks, task]
+  })),
+  on(UpdateTask, (state, {task}) => ({
+    ...state,
+    tasks: state.tasks.map(taskST => {
+      if (taskST.id === task.id) {
+        return task
+      }
+      return taskST;
+    })
+  })),
+  on(SelectTask, (state, {task}) => ({
+    ...state,
+    selectedTask: task
+  }))
+)
 
-      return {
-        ...state,
-        tasks
-      };
-    }
-    case ETaskAction.SelectTask: {
-      return {
-        ...state,
-        selectedTask: action.payload
-      };
-    }
-    default: {
-      return state;
-    }
-  }
+export interface State {
+  tasks: TaskState
 }
+
+export const reducers: ActionReducerMap<State> = {
+  tasks: taskReducer,
+};
+

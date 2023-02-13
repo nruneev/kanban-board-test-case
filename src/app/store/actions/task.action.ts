@@ -1,4 +1,4 @@
-import {Action} from "@ngrx/store";
+import {Action, createAction, props} from "@ngrx/store";
 import {Task} from "../../core/interface/task";
 
 export enum ETaskAction {
@@ -8,24 +8,22 @@ export enum ETaskAction {
   UpdateTask = '[Task] Update task',
 }
 
-export class GetTasks implements Action {
-  public readonly type = ETaskAction.GetTasks;
-  constructor(public payload: Task[]) {}
-}
+export const GetTasks = createAction(
+  ETaskAction.GetTasks,
+  props<{tasks: Task[]}>()
+)
 
-export class AddTask implements Action {
-  public readonly type = ETaskAction.AddTask;
-  constructor(public payload: Task) {}
-}
+export const AddTask = createAction(
+  ETaskAction.AddTask,
+  props<{task: Task}>()
+)
 
-export class UpdateTask implements Action {
-  public readonly type = ETaskAction.UpdateTask;
-  constructor(public payload: Task) {}
-}
+export const UpdateTask = createAction(
+  ETaskAction.UpdateTask,
+  props<{task: Task}>()
+)
 
-export class SelectTask implements Action {
-  public readonly type = ETaskAction.SelectTask;
-  constructor(public payload: Task) {}
-}
-
-export type TaskActions = SelectTask | AddTask | GetTasks | UpdateTask;
+export const SelectTask = createAction(
+  ETaskAction.SelectTask,
+  props<{task: Task}>()
+)

@@ -66,7 +66,7 @@ export class TaskService implements OnDestroy {
     this._subscription.add(
     this._dbService.getAll(STORE_NAME).
       subscribe((tasks) => {
-        this._store.dispatch(new GetTasks(tasks as Task[]))
+        this._store.dispatch(GetTasks({tasks: tasks as Task[]}))
       })
     );
   }
@@ -75,16 +75,17 @@ export class TaskService implements OnDestroy {
     this._subscription.add(
       this._dbService.getByID(STORE_NAME, id).subscribe((task) => {
         if (typeof task !== 'undefined') {
-          this._store.dispatch(new SelectTask(task as Task));
+          this._store.dispatch(SelectTask({task: task as Task}));
         }
       })
     )
   }
 
   private insert(templateTask: TemplateTask): void {
+    console.log(templateTask);
     this._subscription.add(
       this._dbService.add(STORE_NAME, templateTask).subscribe((task: Task) => {
-        this._store.dispatch(new AddTask(task));
+        this._store.dispatch(AddTask({task}));
       })
     )
   }
@@ -92,7 +93,7 @@ export class TaskService implements OnDestroy {
   private update(updateTask: Task): void {
     this._subscription.add(
       this._dbService.update(STORE_NAME, updateTask).subscribe((task: Task) => {
-        this._store.dispatch(new UpdateTask(task));
+        this._store.dispatch(UpdateTask({task}));
       })
     )
   }
@@ -100,7 +101,7 @@ export class TaskService implements OnDestroy {
   private delete(id: number): void {
     this._subscription.add(
       this._dbService.delete(STORE_NAME, id).subscribe((tasks) => {
-        this._store.dispatch(new GetTasks(tasks as Task[]));
+        this._store.dispatch(GetTasks({tasks: tasks as Task[]}));
       })
     )
   }

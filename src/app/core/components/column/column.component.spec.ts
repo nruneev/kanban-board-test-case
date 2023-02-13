@@ -2,6 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ColumnComponent} from './column.component';
 import {StatusTask} from "../../enum/status-task";
+import {of} from "rxjs";
 
 describe('ColumnComponent', () => {
   let component: ColumnComponent;
@@ -17,7 +18,8 @@ describe('ColumnComponent', () => {
     component = fixture.componentInstance;
     component.column = {
       title: '',
-      value: StatusTask.new
+      value: StatusTask.new,
+      tasks: of([])
     }
     fixture.detectChanges();
   });
@@ -29,6 +31,7 @@ describe('ColumnComponent', () => {
   it('should change value', () => {
     component.column = {
       title: 'New',
+      tasks: of([]),
       value: StatusTask.new
     }
     fixture.detectChanges();
@@ -38,7 +41,8 @@ describe('ColumnComponent', () => {
 
     component.column = {
       title: 'Edit',
-      value: StatusTask.process
+      value: StatusTask.process,
+      tasks: of([])
     }
     fixture.detectChanges();
 

@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header>
-   <app-buttons name="Создать" [isBackground]="true" [icon]="icons.plus"></app-buttons>
+   <app-buttons name="Создать" [isBackground]="true" [icon]="icons.plus" (click)="createTask()"></app-buttons>
   </mat-card-header>
    <mat-card-content>
      <app-column *ngFor="let column of columns" [column]="column"></app-column>

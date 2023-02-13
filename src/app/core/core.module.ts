@@ -10,7 +10,7 @@ import {TaskModule} from "./components/task/task.module";
   imports: [
     CommonModule,
     ColumnModule,
-    TaskModule
+    TaskModule,
   ]
 })
 

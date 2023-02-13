@@ -1,0 +1,39 @@
+<mat-card>
+  <mat-card-header [class]="'header-' + (data.isTimeLose ? 'err' : 'ok')">
+    <p>Новая задача</p>
+    <app-buttons [icon]="icons.close"  [mat-dialog-close]="true"></app-buttons>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="formGroup">
+      <mat-form-field appearance="outline">
+        <mat-label>Наименование</mat-label>
+        <input matInput placeholder="Наименование" formControlName="title">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Описание</mat-label>
+        <textarea matInput placeholder="Описание"  formControlName="description"></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="fill" *ngIf="data.status == 'done' && !data.isTimeLose">
+        <mat-label>Время выполнения, сек</mat-label>
+        <mat-select disabled value="Успех">
+          <mat-option value="Успех">Успех</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill" *ngIf="data.status === 'done' && data.isTimeLose">
+        <mat-label>Время выполнения, сек</mat-label>
+        <mat-select disabled value="Просрочено">
+          <mat-option value="Просрочено">Просрочено</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Состояние задачи</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let statusOption of statusOptions" [value]="statusOption.value">{{statusOption.title}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-footer>
+    <app-buttons name="Закрыть" [isBackground]="true" [mat-dialog-close]="true"></app-buttons>
+  </mat-card-footer>
+</mat-card>

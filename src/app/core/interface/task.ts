@@ -5,6 +5,7 @@ export interface TemplateTask {
   description: string,
   time: number,
   status: StatusTask,
+  isTimeLose: boolean,
   dataUpdate: Date
 }
 
