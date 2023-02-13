@@ -8,7 +8,8 @@ import {ColumnModule} from "./core/components/column/column.module";
 import {provideMockStore} from "@ngrx/store/testing";
 import {PLATFORM_ID} from "@angular/core";
 import {DBConfig, NgxIndexedDBModule} from "ngx-indexed-db";
-import {TaskService} from "./core/service/task.service";
+import {TaskModule} from "./core/components/task/task.module";
+import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
 
 const dbConfig: DBConfig  = {
   name: 'KanbanBoardTestCase',
@@ -34,6 +35,9 @@ describe('AppComponent', () => {
         MatCardModule,
         ButtonsModule,
         ColumnModule,
+        TaskModule,
+        CdkDropList,
+        CdkDrag,
         NgxIndexedDBModule.forRoot(dbConfig)
       ],
       declarations: [

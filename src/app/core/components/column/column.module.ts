@@ -10,10 +10,10 @@ import {TaskModule} from "../task/task.module";
   exports: [
     ColumnComponent
   ],
-    imports: [
-        CommonModule,
-        TaskModule
-    ]
+  imports: [
+    CommonModule,
+    TaskModule,
+  ]
 })
 
 export class ColumnModule { }
