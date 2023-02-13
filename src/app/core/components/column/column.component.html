@@ -2,5 +2,5 @@
   {{column.title}}
 </div>
 <div class="tasksContainer">
-  <app-task *ngFor="let task of column.tasks | async" [task]="task"></app-task>
+  <ng-content></ng-content>
 </div>

@@ -9,6 +9,8 @@ import {TaskOperation} from "./core/enum/task-operation";
 import {TaskState} from "./store/state/task.state";
 import {Store} from "@ngrx/store";
 import {getTasksDone, getTasksNew, getTasksProcess} from "./store/selectors/task.selector";
+import {CdkDragDrop} from "@angular/cdk/drag-drop";
+import {Task} from "./core/interface/task";
 
 
 @Component({
@@ -43,6 +45,17 @@ export class AppComponent implements  OnInit {
       value: StatusTask.done,
       tasks: this.store.select(getTasksDone)
     }];
+  }
+
+  drop(event: CdkDragDrop<Task[]>, column: string): void {
+    console.log();
+    console.log(column);
+    const task = {
+      ...event.previousContainer.data[event.previousIndex],
+      status: column,
+      dataUpdate: new Date(Date.now())
+    } as Task;
+    this._tasksService.getRequestToDB({operation: TaskOperation.update, updateData: task})
   }
 
   createTask(): void {

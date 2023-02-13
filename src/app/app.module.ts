@@ -18,6 +18,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
+import {TaskModule} from "./core/components/task/task.module";
+import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
 
 
 const dbConfig: DBConfig  = {
@@ -57,7 +59,10 @@ const dbConfig: DBConfig  = {
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    TaskModule,
+    CdkDropList,
+    CdkDrag
   ],
   providers: [],
   bootstrap: [AppComponent]
