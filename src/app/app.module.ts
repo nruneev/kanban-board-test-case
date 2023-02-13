@@ -5,7 +5,7 @@ import {DBConfig, NgxIndexedDBModule} from "ngx-indexed-db";
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import {reducers, taskReducer} from "./store/reducers/task.reducer";
+import {reducers} from "./store/reducers/task.reducer";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {AppRoutingModule} from "./app-routing.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
